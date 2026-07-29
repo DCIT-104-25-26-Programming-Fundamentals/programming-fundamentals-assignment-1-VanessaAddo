@@ -54,4 +54,32 @@
 # =============================================================================
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
+def print_single_table(n):
+    print(f"Multiplication Table for {n}:")
+    for i in range(1, 13):
+        print(f"{n}  x  {i}  =  {n * i}")
 
+def print_all_tables(n):
+    for i in range(1, n + 1):
+        print_single_table(i)
+        print("---")
+
+# Main block
+if __name__ == "__main__":
+    try:
+        n = int(input("Enter a number: "))
+        if n <= 0:
+            print("Error: Please enter a positive integer.")
+        else:
+            print_single_table(n)
+    except ValueError:
+        print("Error: Please enter a valid integer.")
+
+    try:
+        N = int(input("Enter the upper limit (N): "))
+        if N <= 0:
+            print("Error: Please enter a positive integer.")
+        else:
+            print_all_tables(N)
+    except ValueError:
+        print("Error: Please enter a valid integer.")

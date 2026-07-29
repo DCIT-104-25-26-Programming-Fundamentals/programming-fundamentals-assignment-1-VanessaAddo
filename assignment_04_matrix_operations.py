@@ -60,3 +60,70 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+def transpose_matrix(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    transposed = [[0] * rows for _ in range(cols)]
+    for i in range(rows):
+        for j in range(cols):
+            transposed[j][i] = matrix[i][j]
+    return transposed
+
+def add_matrices(matrix_a, matrix_b):
+    rows = len(matrix_a)
+    cols = len(matrix_a[0])
+    result = [[0] * cols for _ in range(rows)]
+    for i in range(rows):
+        for j in range(cols):
+            result[i][j] = matrix_a[i][j] + matrix_b[i][j]
+    return result
+
+def multiply_matrices(matrix_a, matrix_b):
+    rows_a = len(matrix_a)
+    cols_a = len(matrix_a[0])
+    rows_b = len(matrix_b)
+    cols_b = len(matrix_b[0])
+    
+    if cols_a != rows_b:
+        raise ValueError("Incompatible matrix dimensions")
+    
+    result = [[0] * cols_b for _ in range(rows_a)]
+    for i in range(rows_a):
+        for j in range(cols_b):
+            for k in range(cols_a):
+                result[i][j] += matrix_a[i][k] * matrix_b[k][j]
+    return result
+def print_matrix(matrix):
+    for row in matrix:
+        print(" ".join(str(val) for val in row))
+    print()
+
+def read_matrix(rows, cols):
+    matrix = []
+    for i in range(rows):
+        row = list(map(int, input(f"Enter row {i + 1}: ").split()))
+        matrix.append(row)
+    return matrix
+
+# Main block
+if __name__ == "__main__":
+    rows = int(input("Enter number of rows: "))
+    cols = int(input("Enter number of columns: "))
+
+    print("Matrix A:")
+    matrix_a = read_matrix(rows, cols)
+
+    print("\nTransposed Matrix:")
+    print_matrix(transpose_matrix(matrix_a))
+
+    print("Matrix B (same size as A):")
+    matrix_b = read_matrix(rows, cols)
+
+    print("\nSum of A and B:")
+    print_matrix(add_matrices(matrix_a, matrix_b))
+
+    try:
+        print("Product of A and B:")
+        print_matrix(multiply_matrices(matrix_a, matrix_b))
+    except ValueError as e:
+        print(f"Error: {e}")
